@@ -18,6 +18,7 @@ class CreateIngredientsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsignedInteger('quantity');
+            $table->unsignedInteger('last_shipment');
             $table->unsignedInteger('merchant_id');
             $table->boolean('merchant_notified')->default(0);
             $table->softDeletes();
