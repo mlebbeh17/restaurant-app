@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,7 @@ Route::fallback(function () {
     return response()->json(['message' => 'Not Found!'], 404);
 });
 
-Route::post('order/create', 'Api\AgentController@login');
+
+Route::group(['prefix' => 'orders'], function () {
+    Route::post('create',[OrdersController::class, 'store']);
+});
