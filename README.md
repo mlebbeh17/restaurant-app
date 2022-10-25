@@ -1,8 +1,3 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
 # Restaurant-app
 
 ## Description
@@ -64,4 +59,20 @@ php artisan queue:work
 php artisan serve
 ```
 
-**PRs are welcome!**
+#### Sample request
+
+```POST /api/orders/create HTTP/1.1
+Host: your-domain
+Content-Type: application/json
+Accept: application/json
+Content-Length: 78
+
+{
+  "products": [
+    {
+      "product_id": 1,
+      "quantity": 2
+    }
+  ]
+}
+```
