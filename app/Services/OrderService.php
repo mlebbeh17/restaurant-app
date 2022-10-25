@@ -15,28 +15,30 @@ class OrderService
 	{
 
 		$validator = validator()->make($data, [
-            'products'              => ['required', 'array'],
-            'products.*.product_id' => ['required', 'int', 'gt:0'],
-            'products.*.quantity'   => ['required', 'int', 'gt:0']
-        ])->validate();
+	            'products'              => ['required', 'array'],
+	            'products.*.product_id' => ['required', 'int', 'gt:0'],
+	            'products.*.quantity'   => ['required', 'int', 'gt:0']
+	        ])->validate();
 
-		$groupedProducts = collect($data['products'])->groupBy('product_id')->map(function ($group) {
-            return $group->sum('quantity');
-        });
+			$groupedProducts = collect($data['products'])->groupBy('product_id')->map(function ($group) {
+	            return $group->sum('quantity');
+	        });
 
-        $this->validateIngredientsEnough($groupedProducts);
+	        $this->validateProducts($groupedProducts->keys());
 
-        $order = Order::create();
+	        $this->validateIngredientsEnough($groupedProducts);
 
-        $groupedProducts->each(function($quantity, $productId) use ($order) {
-        	OrderProduct::create([
-                'order_id'   => $order->id,
-                'product_id' => $productId,
-                'quantity'   => $quantity
-            ]);
-        });
+	        $order = Order::create();
 
-        OrderCreated::dispatch($order);
+	        $groupedProducts->each(function($quantity, $productId) use ($order) {
+	        	OrderProduct::create([
+	                'order_id'   => $order->id,
+	                'product_id' => $productId,
+	                'quantity'   => $quantity
+	            ]);
+	        });
+
+	        OrderCreated::dispatch($order);
 
 	}
 
@@ -57,6 +59,16 @@ class OrderService
 
 		if (!empty($errors)) {
 			throw ValidationException::withMessages(array_values($errors));
+		}
+	}
+
+	public function validateProducts($producstId)
+	{
+
+		$productsCount = Product::whereIn('id', $producstId)->count();
+
+		if ($productsCount != count($producstId)) {
+			throw ValidationException::withMessages(['invalid product']);
 		}
 	}
 }

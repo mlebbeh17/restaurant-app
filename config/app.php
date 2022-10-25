@@ -232,4 +232,5 @@ return [
 
     ],
 
+    'merchant_email' => env('MERCHANT_EMAIL')
 ];

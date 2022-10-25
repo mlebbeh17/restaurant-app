@@ -16,7 +16,7 @@ class MerchantSeeder extends Seeder
         \DB::table('merchants')->insert([
             [
                 'name'        => 'Restaurant supplier',
-                'email'       => env('MERCHANT_EMAIL'),
+                'email'       => config('app.merchant_email'),
                 'description' => 'This merchant provide the restaurant with beef, onion and cheese.',
                 'created_at'  => now(),
                 'updated_at'  => now()
