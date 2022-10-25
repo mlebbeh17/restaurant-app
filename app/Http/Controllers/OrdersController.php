@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\OrderService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 
 class OrdersController extends Controller 
