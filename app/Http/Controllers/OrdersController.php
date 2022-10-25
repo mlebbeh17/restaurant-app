@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
+use App\Services\OrderService;
+
 
 class OrdersController extends Controller {
     /**
@@ -17,11 +19,11 @@ class OrdersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $request->validate([
-            'products'              => ['required', 'array'],
-            'products.*.product_id' => ['required', 'int', 'gt:0'],
-            'products.*.quantity'   => ['required', 'int', 'gt:0']
-        ]);
+        $service = (new OrderService());
+
+        $service->makeOrder($request->all());
+        die;
+        $request->validate();
 
         $check = Product::isEnough(request('products'));
 

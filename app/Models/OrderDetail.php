@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model {
+class OrderDetail extends Model 
+{
     use HasFactory;
 
     protected $guarded = [];
-    
-    public function orders() {
+
+    public function orders() 
+    {
         return $this->belongsTo(Order::class);
     }
 
-    public function products() {
+    public function products() 
+    {
         return $this->belongsTo(Product::class);
     }
 }
