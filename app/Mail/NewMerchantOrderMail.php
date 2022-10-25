@@ -7,7 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewMerchantOrderMail extends Mailable {
+class NewMerchantOrderMail extends Mailable 
+{
     use Queueable, SerializesModels;
 
     public $receiver_name;
@@ -20,7 +21,8 @@ class NewMerchantOrderMail extends Mailable {
      *
      * @return void
      */
-    public function __construct($receiver_name, $ingredient_name) {
+    public function __construct($receiver_name, $ingredient_name) 
+    {
         $this->receiver_name   = $receiver_name;
         $this->ingredient_name = $ingredient_name;
 
@@ -33,7 +35,8 @@ class NewMerchantOrderMail extends Mailable {
      *
      * @return $this
      */
-    public function build() {
+    public function build() 
+    {
         return $this->subject('Ingredient order')->view('emails.NewMerchantOrderMail');
     }
 
