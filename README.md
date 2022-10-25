@@ -49,6 +49,7 @@ Set your queue connection key in .env for example:
 QUEUE_CONNECTION=database
 ```
 #### Run Application
+
 ```shell
 # Run the queue locally
 php artisan queue:work
