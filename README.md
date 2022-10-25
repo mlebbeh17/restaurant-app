@@ -1,3 +1,8 @@
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
 # Restaurant-app
 
 ## Description
@@ -42,12 +47,13 @@ Set your seeder merchant email in the .env
 MERCHANT_EMAIL=merchant@mail.com
 ````
 
-
 #### Queue Connection
 Set your queue connection key in .env for example:
 ````
 QUEUE_CONNECTION=database
-```
+````
+
+
 #### Run Application
 
 ```shell
